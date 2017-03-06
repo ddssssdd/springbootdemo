@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,5 +15,11 @@ public class Home {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(){
         return "Hello, this is a test";
+    }
+
+
+    @RequestMapping("hello/{Name}")
+    public String helloName(@PathVariable String Name){
+        return "hello " + Name;
     }
 }

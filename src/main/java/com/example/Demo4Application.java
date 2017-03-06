@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +17,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
+@EnableScheduling
 public class Demo4Application  implements CommandLineRunner{
 
 
@@ -52,6 +56,21 @@ public class Demo4Application  implements CommandLineRunner{
 	public void info(String log)
 	{
 		System.out.println(log);
+	}
+
+
+	@Bean
+	public CommandLineRunner commandLineRunner(ApplicationContext ctx){
+		return args -> {
+			System.out.println("Let's inspect the beans provided by Spring boot");
+
+			String[] beanNames = ctx.getBeanDefinitionNames();
+			Arrays.sort(beanNames);
+			for(String beanName : beanNames){
+				System.out.println(beanName);
+			}
+		};
+
 	}
 
 }
