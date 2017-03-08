@@ -1,11 +1,129 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Hello World!</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="template::header">
+
 </head>
-<body>
-<h1 th:inline="text">Hello.v.2</h1>
-<p th:text="${hello}"></p>
+<body class="fixed-left">
+<div id="wrapper">
+    <div th:replace="template::topbar">
+    </div>
+    <div th:replace="template::side-menu">
+    </div>
+    <div class="content-page">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <span th:text="${hello}">test</span>
+                        <span th:text="${settings.name}"></span>
+                        <span th:text="${settings.company}"></span>
+                        <span th:text="${autoload}"></span>
+                        <span th:text="${#ctx.locale}"></span>
+                        <h4 class="page-title" th:text="#{app.title}">this should not been see.</h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="mini-stat clearfix bx-shadow bg-info">
+                                <span class="mini-stat-icon"><i class="fa fa-quote-right" aria-hidden="true"></i></span>
+                                <div class="mini-stat-info text-right">
+                                    发表了<span class="counter">3</span>篇文章
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="mini-stat clearfix bg-purple bx-shadow">
+                                <span class="mini-stat-icon"><i class="fa fa-comments-o" aria-hidden="true"></i></span>
+                                <div class="mini-stat-info text-right">
+                                    收到了<span class="counter">2</span>条留言
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="mini-stat clearfix bg-success bx-shadow">
+                                <span class="mini-stat-icon"><i class="fa fa-cloud-upload" aria-hidden="true"></i></span>
+                                <div class="mini-stat-info text-right">
+                                    上传了<span class="counter">1</span>个附件
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="mini-stat clearfix bg-primary bx-shadow">
+                                <span class="mini-stat-icon"><i class="fa fa-link" aria-hidden="true"></i></span>
+                                <div class="mini-stat-info text-right">
+                                    友链了<span class="counter">5</span>个好友
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">最新文章</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+
+                                        <li class="list-group-item" th:each="item : ${list}">
+                            <span class="badge badge-primary"
+                                  title="1条评论">look num</span>
+                                            <a target="_blank" href="" th:text="${item}">title</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">最新留言</h4>
+                                </div>
+                                <div class="panel-body">
+
+
+                                    <ul class="list-group">
+
+                                        <li class="list-group-item">
+
+                                            <a href="" target="_blank">loop author</a>
+
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">系统日志</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+
+                                        <li class="list-group-item">
+                                            <span>loop item</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:include="template::js_ref"></div>
 </body>
 </html>

@@ -1,28 +1,62 @@
 package com.example;
 
+import com.example.config.ConfigBean;
 import com.example.model.Customer;
-import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
 @EnableScheduling
-public class Demo4Application  implements CommandLineRunner{
+@EnableConfigurationProperties({ConfigBean.class})
+public class Demo4Application extends WebMvcConfigurerAdapter implements CommandLineRunner{
 
 
 	public static void main(String[] args) {
 		SpringApplication.run(Demo4Application.class, args);
+	}
+
+	@Bean
+	public LocaleResolver localeResolver() {
+		return new CookieLocaleResolver();
+		/*
+		SessionLocaleResolver slr = new SessionLocaleResolver();
+		slr.setDefaultLocale(Locale.CHINA);
+		return slr;
+		*/
+	}
+
+
+
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+		LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+		lci.setParamName("lang");
+		return lci;
+	}
+
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(localeChangeInterceptor());
 	}
 
 	@Autowired
