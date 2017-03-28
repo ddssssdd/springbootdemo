@@ -76,6 +76,12 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<!-- Jasper Report Specific Jars END -->
+		<!-- mail config -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<!-- mail config -->
 	</dependencies>
 
 	<build>
